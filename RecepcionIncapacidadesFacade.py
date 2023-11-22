@@ -1,5 +1,5 @@
-import Incapacidad
-from receptionMechanisms.MainOffices import MainOffices
+from Incapacidad import Incapacidad
+from receptionMechanisms.MainOffices import *
 from receptionMechanisms.Receptionista import *
 from VerificadorIncapacidades import *
 
