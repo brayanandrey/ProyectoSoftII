@@ -1,5 +1,5 @@
 
-from CobroIncapacidades.Recepcionista import Recepcionista
+from receptionMechanisms.Receptionista import Recepcionista
 from CobroIncapacidades.AuxiliarAdministrativo import AuxiliarAdministrativo
 from CobroIncapacidades.EPS_ARL import EPS_ARL
 from CobroIncapacidades.SeguimientoCobro import SeguimientoCobro

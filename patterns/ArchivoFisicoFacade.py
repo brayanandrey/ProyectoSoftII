@@ -1,5 +1,5 @@
 
-from archivoFisico.Documento import Incapacidad
+from Incapacidad import Incapacidad
 from archivoFisico.ArchivoFisicoRepository import ArchivoFisicoRepository
 
 class ArchivoFisicoFacade:
