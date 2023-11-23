@@ -5,7 +5,7 @@ class Recepcionista:
         self.observadores = []
         
     def recibir_incapacidad(self, incapacidad):
-        print(f"Recibiendo incapacidad para {incapacidad.tipo}")
+        print(f"La Recepcionista recibio incapacidad para {incapacidad.tipo}")
         
     def actualizar(self, mensaje):
         print(f"La recepcionista recibió el siguiente mensaje: {mensaje}")
