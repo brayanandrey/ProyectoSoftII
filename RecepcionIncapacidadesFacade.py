@@ -32,5 +32,5 @@ if __name__ == "__main__":
     facade.recibir_incapacidad(incapacidad1)
     facade.recibir_incapacidad(incapacidad2)
 
-facade.verificar_incapacidades(incapacidad1)
-facade.verificar_incapacidades(incapacidad2)
+    facade.verificar_incapacidades(incapacidad1)
+    facade.verificar_incapacidades(incapacidad2)

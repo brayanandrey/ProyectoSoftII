@@ -8,3 +8,6 @@ class EPS_ARL(Observador):
 
     def procesar_pago(self):
         print("EPS/ARL: Procesando el pago de la incapacidad.")
+        
+    def solicitar_pago(self, incapacidad):
+        pass

@@ -1,5 +1,5 @@
 
-from PagosSubject import PagosSubject
+from conciliacioncontable.PagosSubject import PagosSubject
 
 class ConcreteSubject(PagosSubject):
     def __init__(self):

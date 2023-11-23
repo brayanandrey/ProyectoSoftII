@@ -1,5 +1,5 @@
 # ConcreteObserver.py
-from PaymentObserver import PaymentObserver
+from conciliacioncontable.PaymentObserver import PaymentObserver
 
 class ConcreteObserver(PaymentObserver):
     def __init__(self, subject, name):
