@@ -1,4 +1,3 @@
-
 from archivoFisico.Documento import Documento
 
 class ArchivoFisicoRepository:
