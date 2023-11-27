@@ -1,17 +1,32 @@
+from patterns.RecepcionIncapacidadesFacade import RecepcionIncapacidadesFacade
 from RecepcionIncapacidadesFacade import RecepcionIncapacidadesFacade
 from receptionMechanisms.LideresComerciales import LideresComerciales
 from Incapacidad import Incapacidad
 from GestionHumana import *
 
-facade = RecepcionIncapacidadesFacade()
-incapacidad1 = Incapacidad("Enfermedad General")
-incapacidad2 = Incapacidad("Accidente Laboral")
+def tipos_incapacidades():
+    print("1. Enfermedad General")
+    print("2. Accidente Laboral")
+    print("3. Maternidad")
+    print("4. Enfermedad Profesional")
+    print("5. Accidente de Trabajo")
+    print("6. Enfermedad Laboral")
+    
 
-facade.recibir_incapacidad(incapacidad1)
-facade.recibir_incapacidad(incapacidad2)
+def main():
+    facade = RecepcionIncapacidadesFacade()
 
-facade.verificar_incapacidades(incapacidad1)
-facade.verificar_incapacidades(incapacidad2)
+
+    facade.recibir_incapacidad(incapacidad1)
+    facade.recibir_incapacidad(incapacidad2)
+
+    facade.verificar_incapacidades(incapacidad1)
+    facade.verificar_incapacidades(incapacidad2)
+
+def obtener_incapacidad():
+    tipo = input("Ingrese el tipo de incapacidad: ")
+    incapacidad = Incapacidad(tipo)
+    return incapacidad
 
 # main.py
 
