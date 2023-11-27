@@ -1,8 +1,13 @@
 from patterns.RecepcionIncapacidadesFacade import RecepcionIncapacidadesFacade
-from RecepcionIncapacidadesFacade import RecepcionIncapacidadesFacade
+from patterns.RecepcionIncapacidadesFacade import RecepcionIncapacidadesFacade
 from receptionMechanisms.LideresComerciales import LideresComerciales
 from Incapacidad import Incapacidad
 from GestionHumana import *
+from vistas.vistaColaborador import *
+from PyQt5.QtWidgets import *
+from PyQt5 import uic
+import os
+
 
 def tipos_incapacidades():
     print("1. Enfermedad General")
@@ -29,6 +34,14 @@ def obtener_incapacidad():
     return incapacidad
 
 # main.py
+
+def exec_window():
+    app = QApplication([])
+    window = MyGUI()
+    window.setWindowTitle("Gestión Incapacidades")
+    app.exec_()
+    return window
+    
 
 
 def main():
@@ -62,4 +75,8 @@ def main():
     print("Realizando otras acciones o procesos después de la entrega de la incapacidad.")
 
 if __name__ == "__main__":
-    main()
+    #main()
+    exec_window()
+
+    
+    

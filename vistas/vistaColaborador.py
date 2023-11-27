@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import os
+import BaseDatos.connetion as BD
 
 class MyGUI(QMainWindow):
     def __init__(self):
@@ -41,36 +42,58 @@ class MyGUI(QMainWindow):
             self.show_warning("El campo de descripción no puede estar vacío.")
             return
         
+        if (
+            self.NamelineEdit.text() == "" or
+            self.comboBox.currentText() == "Seleccionar" or
+            self.DocumentLineEdit.text() == "" or
+            self.comboBox_2.currentText() == "Seleccionar" or
+            self.EmaillineEdit.text() == "" or
+            self.ChargelineEdit.text() == "" or
+            self.label_file_name.text() == "Seleccionar archivo..." or
+            self.DescriptiontextEdit.toPlainText() == ""
+        ):
+            self.show_warning("Todos los campos deben estar llenos.")
+            return
         
-        self.show_selected_type_document()
-        self.show_selected_type_inability()
-        self.show_selected_name()
-        self.show_selected_email()
-        self.show_selected_charge()
+        type_document = self.show_selected_type_document()
+        type_inability = self.show_selected_type_inability()
+        selected_name = self.show_selected_name()
+        selected_email = self.show_selected_email()
+        selected_charge = self.show_selected_charge()
+        
+        BD.conectar()
+        BD.insertar_colaborador(selected_charge, type_document, selected_email, selected_name)
+        #BD.insertar_incapacidad(self.DescriptiontextEdit.toPlainText(), "Pendiente", type_document, type_inability)
         
     def show_selected_type_document(self):
         type_document = self.comboBox.currentText()
-        print(type_document)
+        # print(type_document)
+        return type_document
         
     def show_selected_document(self):
-        type_document = self.DocumentLineEdit.currentText()
-        print(type_document)
+        document = self.DocumentLineEdit.currentText()
+        # print(document)
+        return document
         
     def show_selected_type_inability(self):
         type_inability = self.comboBox_2.currentText()
-        print(type_inability)
+        # print(type_inability)
+        return type_inability
         
     def show_selected_name(self):
         name = self.NamelineEdit.text()
-        print(name)
+        # print(name)
+        return name
         
     def show_selected_email(self):
         email = self.EmaillineEdit.text()
-        print(email)
+        # print(email)
+        return email
         
     def show_selected_charge(self):
         charge = self.ChargelineEdit.text()
-        print(charge)
+        # print(charge)
+        return charge
         
     def show_warning(self, message):
         QMessageBox.warning(self, "Advertencia", message)
@@ -99,7 +122,7 @@ class MyGUI(QMainWindow):
                 self.label_file_name.setText("Seleccionar archivo...")
                 QMessageBox.information(self, "Información", "El archivo PDF ha sido eliminado.")
             else:
-                QMessageBox.information(self, "Información", "Eliminación dek archivo PDF cancelada.")
+                QMessageBox.information(self, "Información", "Eliminación del archivo PDF cancelada.")
             
             
             
