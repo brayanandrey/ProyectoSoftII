@@ -66,11 +66,11 @@ class MyGUI(QMainWindow):
         
         type_inability = self.show_selected_type_inability()
         selected_charge = self.show_selected_charge()
-        selected_document = self.show_selected_document()
+        #selected_document = self.show_selected_document()
         # documentacion = self.show_file_dialog()
         
         BD.conectar()
-        BD.insertar_incapacidad(self.DescriptiontextEdit.toPlainText(), "Pendiente", selected_document, type_inability, documentacion, os.path.basename(self.label_file_name.text()))
+        BD.insertar_incapacidad(self.DescriptiontextEdit.toPlainText(), "Pendiente", self.DocumentLineEdit.text(), type_inability, documentacion, os.path.basename(self.label_file_name.text()))
         
     def show_selected_type_document(self):
         type_document = self.comboBox.currentText()
