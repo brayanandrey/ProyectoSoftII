@@ -160,7 +160,7 @@
      <item>
       <widget class="QPushButton" name="pushButton_3">
        <property name="text">
-        <string>Seguimiento</string>
+        <string>Observaciones</string>
        </property>
       </widget>
      </item>
