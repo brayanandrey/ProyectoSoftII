@@ -9,11 +9,13 @@ class MyGUI(QMainWindow):
         uic.loadUi("vistas/vistaColaborador.ui", self)
         self.show()
         
-        self.Insertar.clicked.connect(self.insert_data)
-        self.cargar_PDF.clicked.connect(self.show_file_dialog)
+        documentacion = self.cargar_PDF.clicked.connect(self.show_file_dialog)
+        self.Insertar.clicked.connect(lambda: self.insert_data(documentacion))
         self.Eliminar_PDF.clicked.connect(self.delete_pdf)
         
-    def insert_data(self):
+        self.llenar_tabla_incapacidades()
+        
+    def insert_data(self, documentacion):
         #Compare text diferent of null or empty string
         if self.NamelineEdit.text() == "":
             self.show_warning("El campo de nombre no puede estar vacío.")
@@ -61,10 +63,11 @@ class MyGUI(QMainWindow):
         selected_email = self.show_selected_email()
         selected_charge = self.show_selected_charge()
         selected_document = self.show_selected_document()
+        # documentacion = self.show_file_dialog()
         
         BD.conectar()
         BD.insertar_colaborador(selected_charge, selected_document, selected_email, selected_name)
-        BD.insertar_incapacidad(self.DescriptiontextEdit.toPlainText(), "Pendiente", selected_document, type_inability)
+        BD.insertar_incapacidad(self.DescriptiontextEdit.toPlainText(), "Pendiente", selected_document, type_inability, documentacion, os.path.basename(self.label_file_name.text()))
         
     def show_selected_type_document(self):
         type_document = self.comboBox.currentText()
@@ -109,7 +112,11 @@ class MyGUI(QMainWindow):
         if file_dialog.exec_() == QFileDialog.Accepted:
             file_name = file_dialog.selectedFiles()[0]
             print(file_name)
+            with open(file_name, "rb") as file:
+                file_data = file.read()
             self.label_file_name.setText(file_name)
+            return file_data
+                
             
     def delete_pdf(self):
         current_file = self.label_file_name.text()
@@ -125,7 +132,18 @@ class MyGUI(QMainWindow):
             else:
                 QMessageBox.information(self, "Información", "Eliminación del archivo PDF cancelada.")
             
-            
+    def llenar_tabla_incapacidades(self):
+        BD.conectar()
+        incapacidades = BD.obtener_datos_incapacidades()
+        self.tableWidget.clearContents()
+        self.tableWidget.setRowCount(0)
+        
+        # Llenar la tabla con los datos obtenidos
+        for row_number, row_data in enumerate(incapacidades):
+            self.tableWidget.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                item = QTableWidgetItem(str(data))
+                self.tableWidget.setItem(row_number, column_number, item)
             
         
         
