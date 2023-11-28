@@ -89,6 +89,28 @@ def obtener_ID_colaborador(email):
     finally:
         cerrar_conexion(connection, cursor)
         
+#get name from colaborador by document
+def obtener_nombre_colaborador(Documento):
+    try:
+        connection = conectar()
+        cursor = connection.cursor()
+
+        # Realiza la consulta para obtener el nombre del colaborador
+        query = "SELECT nombre FROM colaboradores WHERE Documento = %s"
+        cursor.execute(query, (Documento,))
+
+        # Obtiene el resultado de la consulta
+        result = cursor.fetchone()
+
+        return result
+
+    except pymysql.Error as e:
+        print(f"Error al obtener datos de la base de datos: {e}")
+
+    finally:
+        cerrar_conexion(connection, cursor)
+        
+        
 def obtener_datos_incapacidades(ID_Colaborador):
     try:
         connection = conectar()

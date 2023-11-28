@@ -10,9 +10,16 @@ class MyGUI(QMainWindow):
         self.show()
         self.email = email
         
-        ID_colaborador = BD.obtener_ID_colaborador(self.email)
+        ID_colaborador = BD.obtener_ID_colaborador(self.email)[0]
         print(ID_colaborador)
         print(self.email)
+        
+        name = BD.obtener_nombre_colaborador(ID_colaborador)[0]
+        print(name)
+        
+        self.NamelineEdit.setText(name)
+        self.EmaillineEdit.setText(self.email)
+        self.DocumentLineEdit.setText(ID_colaborador)
         
         documentacion = self.cargar_PDF.clicked.connect(self.show_file_dialog)
         self.Insertar.clicked.connect(lambda: self.insert_data(documentacion))
@@ -26,20 +33,11 @@ class MyGUI(QMainWindow):
         
     def insert_data(self, documentacion):
         #Compare text diferent of null or empty string
-        if self.NamelineEdit.text() == "":
-            self.show_warning("El campo de nombre no puede estar vacío.")
-            return
         if self.comboBox.currentText() == "Seleccionar":
             self.show_warning("Debe seleccionar un tipo de documento.")
             return
-        if self.DocumentLineEdit.text() == "":
-            self.show_warning("El campo de documento no puede estar vacío.")
-            return
         if self.comboBox_2.currentText() == "Seleccionar":
             self.show_warning("Debe seleccionar un tipo de incapacidad.")
-            return
-        if self.EmaillineEdit.text() == "":
-            self.show_warning("El campo de email no puede estar vacío.")
             return
         if self.ChargelineEdit.text() == "":
             self.show_warning("El campo de cargo no puede estar vacío.")
@@ -66,10 +64,7 @@ class MyGUI(QMainWindow):
             self.show_warning("Todos los campos deben estar llenos.")
             return
         
-        type_document = self.show_selected_type_document()
         type_inability = self.show_selected_type_inability()
-        selected_name = self.show_selected_name()
-        selected_email = self.show_selected_email()
         selected_charge = self.show_selected_charge()
         selected_document = self.show_selected_document()
         # documentacion = self.show_file_dialog()
@@ -82,25 +77,10 @@ class MyGUI(QMainWindow):
         # print(type_document)
         return type_document
         
-    def show_selected_document(self):
-        document = self.DocumentLineEdit.text()
-        # print(document)
-        return document
-        
     def show_selected_type_inability(self):
         type_inability = self.comboBox_2.currentText()
         # print(type_inability)
         return type_inability
-        
-    def show_selected_name(self):
-        name = self.NamelineEdit.text()
-        # print(name)
-        return name
-        
-    def show_selected_email(self):
-        email = self.EmaillineEdit.text()
-        # print(email)
-        return email
         
     def show_selected_charge(self):
         charge = self.ChargelineEdit.text()

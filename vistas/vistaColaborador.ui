@@ -160,7 +160,7 @@
      <item>
       <widget class="QPushButton" name="pushButton_3">
        <property name="text">
-        <string>PushButton</string>
+        <string>Seguimiento</string>
        </property>
       </widget>
      </item>
@@ -380,6 +380,9 @@
       <width>161</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
@@ -788,6 +791,9 @@
     <property name="text">
      <string/>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QLabel" name="label_7">
     <property name="geometry">
@@ -967,6 +973,9 @@
       <width>161</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="Documentlabel_4">
