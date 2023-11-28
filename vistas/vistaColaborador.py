@@ -60,10 +60,11 @@ class MyGUI(QMainWindow):
         selected_name = self.show_selected_name()
         selected_email = self.show_selected_email()
         selected_charge = self.show_selected_charge()
+        selected_document = self.show_selected_document()
         
         BD.conectar()
-        BD.insertar_colaborador(selected_charge, type_document, selected_email, selected_name)
-        #BD.insertar_incapacidad(self.DescriptiontextEdit.toPlainText(), "Pendiente", type_document, type_inability)
+        BD.insertar_colaborador(selected_charge, selected_document, selected_email, selected_name)
+        BD.insertar_incapacidad(self.DescriptiontextEdit.toPlainText(), "Pendiente", selected_document, type_inability)
         
     def show_selected_type_document(self):
         type_document = self.comboBox.currentText()
@@ -71,7 +72,7 @@ class MyGUI(QMainWindow):
         return type_document
         
     def show_selected_document(self):
-        document = self.DocumentLineEdit.currentText()
+        document = self.DocumentLineEdit.text()
         # print(document)
         return document
         
