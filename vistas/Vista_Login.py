@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from vistas.Vista_Registro import *
 from vistas.vistaColaborador import *
+from BaseDatos.connetion import *
 
 class LoginWindow(QDialog):
     def __init__(self):
@@ -18,17 +19,18 @@ class LoginWindow(QDialog):
             self.reject()
 
     def iniciar_sesion(self):
-        email = self.lineEdit.text()
-        password = self.lineEdit_2.text()
-
+        email = self.Email_lineEdit.text()
+        password = self.password_lineEdit.text()
         # Base de Datos
-
-        if email == "usu" and password == "1234":
+        
+        if (verificar_credenciales(email, password)):
             self.accept()
-            main_window = MyGUI()
-            main_window.show() 
         else:
             QMessageBox.warning(self, "Inicio de Sesión", "¡Autenticación fallida!")
+            return
+    
+    def obtener_email(self):
+        return self.Email_lineEdit.text()
 
 if __name__ == "__main__":
     app = QApplication([])

@@ -42,18 +42,13 @@ def exec_window():
     login_window = LoginWindow()
 
     if login_window.exec_() == QDialog.Accepted:
-        window = MyGUI()
+        email = login_window.obtener_email()
+        window = MyGUI(email)
         window.setWindowTitle("Gestión Incapacidades")
         window.show()
-        app.exec_()
-
-
-#def exec_window():
-    app = QApplication([])
-    window = MyGUI()
-    window.setWindowTitle("Gestión Incapacidades")
-    app.exec_()
-    return window
+        app.exec_() 
+        
+        
 
 
 def main():
