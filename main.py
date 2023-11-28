@@ -4,6 +4,8 @@ from receptionMechanisms.LideresComerciales import LideresComerciales
 from Incapacidad import Incapacidad
 from GestionHumana import *
 from vistas.vistaColaborador import *
+from vistas.Vista_Login import *
+from vistas.Vista_Registro import *
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import os
@@ -37,11 +39,21 @@ def obtener_incapacidad():
 
 def exec_window():
     app = QApplication([])
+    login_window = LoginWindow()
+
+    if login_window.exec_() == QDialog.Accepted:
+        window = MyGUI()
+        window.setWindowTitle("Gestión Incapacidades")
+        window.show()
+        app.exec_()
+
+
+#def exec_window():
+    app = QApplication([])
     window = MyGUI()
     window.setWindowTitle("Gestión Incapacidades")
     app.exec_()
     return window
-    
 
 
 def main():
@@ -77,6 +89,4 @@ def main():
 if __name__ == "__main__":
     #main()
     exec_window()
-
-    
     
