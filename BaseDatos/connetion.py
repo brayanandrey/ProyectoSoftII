@@ -13,14 +13,14 @@ def cerrar_conexion(connection, cursor):
     cursor.close()
     connection.close()
 
-def insertar_incapacidad(descripcion, estado, Documento, Tipo_incapacidad):
+def insertar_incapacidad(descripcion, estado, ID_Colaborador, Tipo_incapacidad):
     try:
         connection = conectar()
         cursor = connection.cursor()
 
         # Query para la inserción
-        query = "INSERT INTO incapacidades (descripcion, estado, Documento, Tipo_incapacidad) VALUES (%s, %s, %s, %s)"
-        data = (descripcion, estado, Documento, Tipo_incapacidad)
+        query = "INSERT INTO incapacidades (descripcion, estado, ID_Colaborador, Tipo_incapacidad) VALUES (%s, %s, %s, %s)"
+        data = (descripcion, estado, ID_Colaborador, Tipo_incapacidad)
 
         # Ejecutar la inserción
         cursor.execute(query, data)
@@ -38,6 +38,15 @@ def insertar_colaborador(Cargo, Documento, email, nombre):
     try:
         connection = conectar()
         cursor = connection.cursor()
+        
+        # Verificar si el colaborador ya existe
+        query_verificacion = "SELECT * FROM colaboradores WHERE Documento = %s"
+        data_verificacion = (Documento,)
+        cursor.execute(query_verificacion, data_verificacion)
+
+        if cursor.fetchone():
+            print(f"El colaborador con Documento {Documento} ya existe en la base de datos.")
+            return  # Puedes decidir no realizar la inserción o manejarlo de otra manera
 
         # Query para la inserción
         query = "INSERT INTO colaboradores (Cargo, Documento, email, nombre) VALUES (%s, %s, %s, %s)"
