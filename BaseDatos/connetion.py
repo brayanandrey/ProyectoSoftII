@@ -34,7 +34,7 @@ def insertar_incapacidad(descripcion, estado, ID_Colaborador, Tipo_incapacidad, 
     finally:
         cerrar_conexion(connection, cursor)
 
-def insertar_colaborador(Cargo, Documento, email, nombre):
+def insertar_colaborador(Cargo, Documento, email, nombre, password):
     try:
         connection = conectar()
         cursor = connection.cursor()
@@ -46,21 +46,23 @@ def insertar_colaborador(Cargo, Documento, email, nombre):
 
         if cursor.fetchone():
             print(f"El colaborador con Documento {Documento} ya existe en la base de datos.")
-            return  # Puedes decidir no realizar la inserción o manejarlo de otra manera
+            return False
 
         # Query para la inserción
-        query = "INSERT INTO colaboradores (Cargo, Documento, email, nombre) VALUES (%s, %s, %s, %s)"
-        data = (Cargo, Documento, email, nombre)
+        query = "INSERT INTO colaboradores (Cargo, Documento, email, nombre, password) VALUES (%s, %s, %s, %s, %s)"
+        data = (Cargo, Documento, email, nombre, password)
 
         # Ejecutar la inserción
         cursor.execute(query, data)
         connection.commit()
         
         print("Colaborador insertado correctamente")
+        return True
 
     except pymysql.Error as e:
         print(f"Error al insertar datos en la base de datos: {e}")
         connection.rollback()
+        return False
 
     finally:
         cerrar_conexion(connection, cursor)

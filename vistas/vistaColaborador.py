@@ -75,7 +75,6 @@ class MyGUI(QMainWindow):
         # documentacion = self.show_file_dialog()
         
         BD.conectar()
-        #BD.insertar_colaborador(selected_charge, selected_document, selected_email, selected_name)
         BD.insertar_incapacidad(self.DescriptiontextEdit.toPlainText(), "Pendiente", selected_document, type_inability, documentacion, os.path.basename(self.label_file_name.text()))
         
     def show_selected_type_document(self):

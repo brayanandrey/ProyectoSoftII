@@ -47,9 +47,6 @@ def exec_window():
         window.setWindowTitle("Gestión Incapacidades")
         window.show()
         app.exec_() 
-        
-        
-
 
 def main():
     recepcion_facade = RecepcionIncapacidadesFacade()

@@ -3,6 +3,7 @@ from PyQt5.uic import loadUi
 from vistas.Vista_Registro import *
 from vistas.vistaColaborador import *
 from BaseDatos.connetion import *
+from PyQt5.QtCore import QCoreApplication
 
 class LoginWindow(QDialog):
     def __init__(self):
@@ -13,15 +14,16 @@ class LoginWindow(QDialog):
         self.pushButton.clicked.connect(self.abrir_registro)
         self.pushButton_2.clicked.connect(self.iniciar_sesion)
 
+
     def abrir_registro(self):
         registro_window = RegistroWindow()
         if registro_window.exec_() == QDialog.Accepted:
-            self.reject()
+            self.close() 
+            # QCoreApplication.processEvents()
 
     def iniciar_sesion(self):
         email = self.Email_lineEdit.text()
         password = self.password_lineEdit.text()
-        # Base de Datos
         
         if (verificar_credenciales(email, password)):
             self.accept()
