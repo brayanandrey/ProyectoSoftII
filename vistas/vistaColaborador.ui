@@ -1065,14 +1065,14 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionClose"/>
+    <addaction name="actionRefresh"/>
    </widget>
    <addaction name="menufile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionClose">
+  <action name="actionRefresh">
    <property name="text">
-    <string>Close</string>
+    <string>Refrescar</string>
    </property>
   </action>
  </widget>

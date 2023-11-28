@@ -64,15 +64,37 @@ def insertar_colaborador(Cargo, Documento, email, nombre):
 
     finally:
         cerrar_conexion(connection, cursor)
+
+
+#get document from colaborador by email
+def obtener_ID_colaborador(email):
+    try:
+        connection = conectar()
+        cursor = connection.cursor()
+
+        # Realiza la consulta para obtener el documento del colaborador
+        query = "SELECT Documento FROM colaboradores WHERE Email = %s"
+        cursor.execute(query, (email,))
+
+        # Obtiene el resultado de la consulta
+        result = cursor.fetchone()
+
+        return result
+
+    except pymysql.Error as e:
+        print(f"Error al obtener datos de la base de datos: {e}")
+
+    finally:
+        cerrar_conexion(connection, cursor)
         
-def obtener_datos_incapacidades():
+def obtener_datos_incapacidades(ID_Colaborador):
     try:
         connection = conectar()
         cursor = connection.cursor()
 
         # Realiza la consulta para obtener los datos de la tabla incapacidades
-        query = "SELECT Estado, Tipo_incapacidad, nombre_archivo FROM incapacidades"
-        cursor.execute(query)
+        query = "SELECT Estado, Tipo_incapacidad, nombre_archivo FROM incapacidades WHERE ID_Colaborador = %s"
+        cursor.execute(query, (ID_Colaborador,))
 
         # Obtiene todos los resultados de la consulta
         results = cursor.fetchall()
@@ -84,4 +106,32 @@ def obtener_datos_incapacidades():
 
     finally:
         cerrar_conexion(connection, cursor)
+        
+import pymysql
+
+def verificar_credenciales(email, password):
+    try:
+        connection = conectar()
+        cursor = connection.cursor()
+
+        # Realiza la consulta para obtener la contraseña del email dado
+        query = "SELECT password FROM colaboradores WHERE Email = %s"
+        cursor.execute(query, (email,))
+        result = cursor.fetchone()
+
+        # Verifica si se encontró el email y compara las contraseñas
+        if result and result[0] == password:
+            print("Credenciales válidas")
+            return True
+        else:
+            print("Credenciales inválidas")
+            return False
+
+    except pymysql.Error as e:
+        print(f"Error al verificar credenciales: {e}")
+        return False
+
+    finally:
+        cerrar_conexion(connection, cursor)
+
 

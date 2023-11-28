@@ -4,16 +4,25 @@ import os
 import BaseDatos.connetion as BD
 
 class MyGUI(QMainWindow):
-    def __init__(self):
+    def __init__(self, email):
         super(MyGUI, self).__init__()
         uic.loadUi("vistas/vistaColaborador.ui", self)
         self.show()
+        self.email = email
+        
+        ID_colaborador = BD.obtener_ID_colaborador(self.email)
+        print(ID_colaborador)
+        print(self.email)
         
         documentacion = self.cargar_PDF.clicked.connect(self.show_file_dialog)
         self.Insertar.clicked.connect(lambda: self.insert_data(documentacion))
         self.Eliminar_PDF.clicked.connect(self.delete_pdf)
+        self.actionRefresh.triggered.connect(lambda :self.reload_view(ID_colaborador))
         
-        self.llenar_tabla_incapacidades()
+        self.llenar_tabla_incapacidades(ID_colaborador)
+        
+    def reload_view(self, ID_colaborador):
+        self.llenar_tabla_incapacidades(ID_colaborador)
         
     def insert_data(self, documentacion):
         #Compare text diferent of null or empty string
@@ -66,7 +75,7 @@ class MyGUI(QMainWindow):
         # documentacion = self.show_file_dialog()
         
         BD.conectar()
-        BD.insertar_colaborador(selected_charge, selected_document, selected_email, selected_name)
+        #BD.insertar_colaborador(selected_charge, selected_document, selected_email, selected_name)
         BD.insertar_incapacidad(self.DescriptiontextEdit.toPlainText(), "Pendiente", selected_document, type_inability, documentacion, os.path.basename(self.label_file_name.text()))
         
     def show_selected_type_document(self):
@@ -132,9 +141,9 @@ class MyGUI(QMainWindow):
             else:
                 QMessageBox.information(self, "Información", "Eliminación del archivo PDF cancelada.")
             
-    def llenar_tabla_incapacidades(self):
+    def llenar_tabla_incapacidades(self, ID_colaborador):
         BD.conectar()
-        incapacidades = BD.obtener_datos_incapacidades()
+        incapacidades = BD.obtener_datos_incapacidades(ID_colaborador)
         self.tableWidget.clearContents()
         self.tableWidget.setRowCount(0)
         
