@@ -36,7 +36,7 @@ class RegistroWindow(QDialog):
             return
         
         try:
-            if insertar_colaborador(selected_charge, selected_document, selected_email, selected_name, selected_password):
+            if insertar_colaborador(selected_charge, selected_document, selected_email, selected_name, selected_password, ""):
                 QMessageBox.information(self, "Registro", "¡Usuario registrado exitosamente!")
                 self.accept()
             else:

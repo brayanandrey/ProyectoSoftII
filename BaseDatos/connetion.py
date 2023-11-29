@@ -35,7 +35,7 @@ def insertar_incapacidad(descripcion, estado, ID_Colaborador, Tipo_incapacidad, 
     finally:
         cerrar_conexion(connection, cursor)
 
-def insertar_colaborador(Cargo, Documento, email, nombre, password):
+def insertar_colaborador(Cargo, Documento, email, nombre, password, mensajes):
     try:
         connection = conectar()
         cursor = connection.cursor()
@@ -50,8 +50,8 @@ def insertar_colaborador(Cargo, Documento, email, nombre, password):
             return False
 
         # Query para la inserción
-        query = "INSERT INTO colaboradores (Cargo, Documento, email, nombre, password) VALUES (%s, %s, %s, %s, %s)"
-        data = (Cargo, Documento, email, nombre, password)
+        query = "INSERT INTO colaboradores (Cargo, Documento, email, nombre, password, mensajes) VALUES (%s, %s, %s, %s, %s, %s)"
+        data = (Cargo, Documento, email, nombre, password, mensajes)
 
         # Ejecutar la inserción
         cursor.execute(query, data)
@@ -182,14 +182,14 @@ def verificar_credenciales(email, password):
     finally:
         cerrar_conexion(connection, cursor)
         
-def obtener_incapacidades_jefe():
+def obtener_incapacidades_jefe(Documento):
     try:
         connection = conectar()
         cursor = connection.cursor()
         
-        query = "SELECT Estado, Tipo_incapacidad, ID_Colaborador, Fecha_Entrega, Documentacion FROM incapacidades"
+        query = "SELECT Estado, Tipo_incapacidad, ID_Colaborador, Fecha_Entrega, nombre_archivo FROM incapacidades WHERE ID_Colaborador = %s"
         # Realiza la consulta para obtener los datos de la tabla incapacidades
-        cursor.execute(query)
+        cursor.execute(query, (Documento,))
 
         # Obtiene todos los resultados de la consulta
         results = cursor.fetchall()
@@ -201,7 +201,7 @@ def obtener_incapacidades_jefe():
 
     finally:
         cerrar_conexion(connection, cursor)
-
+        
 
 def obtener_datos_incapacidades_con_nombre(ID_Colaborador):
     try:
@@ -228,7 +228,7 @@ def obtener_datos_incapacidades_con_nombre(ID_Colaborador):
     finally:
         cerrar_conexion(connection, cursor)
 
-def insertar_incapacidad(descripcion, estado, ID_Colaborador, Tipo_incapacidad, documentacion, nombre_archivo):
+""" def insertar_incapacidad(descripcion, estado, ID_Colaborador, Tipo_incapacidad, documentacion, nombre_archivo):
     try:
         connection = conectar()
         cursor = connection.cursor()
@@ -250,9 +250,9 @@ def insertar_incapacidad(descripcion, estado, ID_Colaborador, Tipo_incapacidad, 
         connection.rollback()
 
     finally:
-        cerrar_conexion(connection, cursor)
+        cerrar_conexion(connection, cursor) """
 
-def obtener_datos_incapacidades(ID_Colaborador):
+""" def obtener_datos_incapacidades(ID_Colaborador):
     try:
         connection = conectar()
         cursor = connection.cursor()
@@ -263,6 +263,68 @@ def obtener_datos_incapacidades(ID_Colaborador):
 
         # Obtiene todos los resultados de la consulta
         results = cursor.fetchall()
+
+        return results
+
+    except pymysql.Error as e:
+        print(f"Error al obtener datos de la base de datos: {e}")
+
+    finally:
+        cerrar_conexion(connection, cursor) """
+        
+def obtener_colaboradores():
+    try:
+        connection = conectar()
+        cursor = connection.cursor()
+
+        # Realiza la consulta para obtener los datos de la tabla incapacidades
+        query = "SELECT ID_Colaborador FROM incapacidades"
+        cursor.execute(query)
+
+        # Obtiene todos los resultados de la consulta
+        results = cursor.fetchall()
+
+        return results
+
+    except pymysql.Error as e:
+        print(f"Error al obtener datos de la base de datos: {e}")
+
+    finally:
+        cerrar_conexion(connection, cursor)
+        
+#update messages from colaborador
+def actualizar_mensajes(Documento, mensajes):
+    try:
+        connection = conectar()
+        cursor = connection.cursor()
+
+        # Realiza la consulta para obtener los datos de la tabla incapacidades
+        query = "UPDATE colaboradores SET mensajes = %s WHERE Documento = %s"
+        cursor.execute(query, (mensajes, Documento))
+
+        # Obtiene todos los resultados de la consulta
+        connection.commit()
+        print("Mensajes actualizados correctamente")
+
+    except pymysql.Error as e:
+        print(f"Error al actualizar datos de la base de datos: {e}")
+        connection.rollback()
+
+    finally:
+        cerrar_conexion(connection, cursor)
+        
+#get message from colaborador
+def obtener_mensajes(Documento):
+    try:
+        connection = conectar()
+        cursor = connection.cursor()
+
+        # Realiza la consulta para obtener los datos de la tabla incapacidades
+        query = "SELECT mensajes FROM colaboradores WHERE Documento = %s"
+        cursor.execute(query, (Documento,))
+
+        # Obtiene todos los resultados de la consulta
+        results = cursor.fetchone()
 
         return results
 

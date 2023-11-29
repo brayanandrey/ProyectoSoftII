@@ -31,8 +31,11 @@ class LoginWindow(QDialog):
         if (verificar_credenciales_jefe(email, password)):
             self.accept()
             self.lider = True
+            self.close()
         elif (verificar_credenciales(email, password)):
             self.accept()
+            self.lider = False
+            self.close()
         else:
             QMessageBox.warning(self, "Inicio de Sesión", "¡Autenticación fallida!")
             return

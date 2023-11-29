@@ -360,7 +360,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="cargar_PDF_3">
+   <widget class="QPushButton" name="enviarNoti">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -371,84 +371,6 @@
     </property>
     <property name="text">
      <string>Enviar Faltante a Colaborador</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>100</y>
-      <width>151</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Certificado de incapacidad</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton_2">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>130</y>
-      <width>151</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Epicrisis</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton_3">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>160</y>
-      <width>151</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>FURIPS</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton_4">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>270</y>
-      <width>211</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Documentos Adicionales Necesarios</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton_5">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>210</y>
-      <width>151</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Información Clara Y Legible</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton_6">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>240</y>
-      <width>221</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Firmados Y Fechados Por profesionales </string>
     </property>
    </widget>
    <widget class="QPushButton" name="cargar_PDF_2">
@@ -475,6 +397,237 @@
     </property>
     <property name="text">
      <string>Segundo Llamado - Enviar Faltante a Colaborador</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>130</y>
+      <width>161</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Certificado de incapacidad</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_2">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>150</y>
+      <width>161</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Epicrisis</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_3">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>170</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>FURIPS</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_4">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>300</y>
+      <width>221</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Documentos Adicionales Necesarios</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_5">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>280</y>
+      <width>221</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Firmados Y Fechados Por profesionales </string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_6">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>260</y>
+      <width>181</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Información Clara Y Legible</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>100</y>
+      <width>191</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>120</red>
+          <green>120</green>
+          <blue>120</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="font">
+     <font>
+      <family>Impact</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Documentación Requrida</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>230</y>
+      <width>191</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>120</red>
+          <green>120</green>
+          <blue>120</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="font">
+     <font>
+      <family>Impact</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Complementarios</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>370</y>
+      <width>131</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Seleccionar Colaborador</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>390</y>
+      <width>111</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Seleccionar</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>440</y>
+      <width>181</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

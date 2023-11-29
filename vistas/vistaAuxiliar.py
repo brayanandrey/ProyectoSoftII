@@ -7,7 +7,7 @@ from datetime import datetime
 class AuxiliarWindow(QMainWindow):
     def __init__(self, email):
         super(AuxiliarWindow, self).__init__()
-        uic.loadUi("vistas/vistaAuxiliar.ui", self)
+        uic.loadUi("vistas/PyQt5/vistaAuxiliar.ui", self)
         self.show()
         self.email = email  # Guardar el email en la instancia para su uso posterior
 

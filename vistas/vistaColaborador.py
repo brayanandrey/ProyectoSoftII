@@ -138,6 +138,7 @@ class MyGUI(QMainWindow):
     def llenar_tabla_incapacidades(self, ID_colaborador):
         BD.conectar()
         incapacidades = BD.obtener_datos_incapacidades(ID_colaborador)
+        #print(incapacidades)
         self.tableWidget.clearContents()
         self.tableWidget.setRowCount(0)
         
@@ -148,7 +149,6 @@ class MyGUI(QMainWindow):
                 item = QTableWidgetItem(str(data))
                 self.tableWidget.setItem(row_number, column_number, item)
             
-        
         
 def main():
     app = QApplication([])
