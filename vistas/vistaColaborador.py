@@ -1,9 +1,13 @@
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import pyqtSignal
 from PyQt5 import uic
 import os
 import BaseDatos.connetion as BD
 
 class MyGUI(QMainWindow):
+
+    nuevaIncapacidadSignal = pyqtSignal(str, str, str, str, str, str)
+
     def __init__(self, email):
         super(MyGUI, self).__init__()
         uic.loadUi("vistas/vistaColaborador.ui", self)
@@ -72,6 +76,15 @@ class MyGUI(QMainWindow):
         BD.conectar()
         BD.insertar_incapacidad(self.DescriptiontextEdit.toPlainText(), "Pendiente", self.DocumentLineEdit.text(), type_inability, documentacion, os.path.basename(self.label_file_name.text()))
         
+        self.nuevaIncapacidadSignal.emit(
+            self.NamelineEdit.text(),
+            self.comboBox.currentText(),
+            self.DocumentLineEdit.text(),
+            self.comboBox_2.currentText(),
+            self.EmaillineEdit.text(),
+            self.DescriptiontextEdit.toPlainText()
+        )
+
     def show_selected_type_document(self):
         type_document = self.comboBox.currentText()
         # print(type_document)

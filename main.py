@@ -6,6 +6,7 @@ from GestionHumana import *
 from vistas.vistaColaborador import *
 from vistas.Vista_Login import *
 from vistas.Vista_Registro import *
+from vistas.vistaAuxiliar import *
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import os
@@ -37,16 +38,35 @@ def obtener_incapacidad():
 
 # main.py
 
-def exec_window():
+def exec_auxiliar_window(email):
+    app = QApplication([])
+    auxiliar_window = AuxiliarWindow(email)
+    auxiliar_window.actualizar_informacion("nombre", "tipo_documento", "documento", "tipo_incapacidad", email, "descripcion")
+    
+    # Supongamos que obtienes la información necesaria para actualizar desde algún lugar
+    nombre = "Nombre Colaborador"
+    tipo_documento = "Cédula"
+    documento = "123456789"
+    tipo_incapacidad = "Enfermedad General"
+    descripcion = "Descripción de la incapacidad"
+
+    # Llama al método con la información necesaria
+    auxiliar_window.actualizar_informacion(nombre, tipo_documento, documento, tipo_incapacidad, email, descripcion)
+
+    auxiliar_window.show()
+    app.exec_()
+
+def exec_main_window():
     app = QApplication([])
     login_window = LoginWindow()
 
     if login_window.exec_() == QDialog.Accepted:
         email = login_window.obtener_email()
-        window = MyGUI(email)
-        window.setWindowTitle("Gestión Incapacidades")
-        window.show()
-        app.exec_() 
+        main_window = MyGUI(email)
+        main_window.setWindowTitle("Gestión Incapacidades")
+        main_window.show()
+        app.exec_()
+        exec_auxiliar_window(email) 
 
 def main():
     recepcion_facade = RecepcionIncapacidadesFacade()
@@ -80,5 +100,4 @@ def main():
 
 if __name__ == "__main__":
     #main()
-    exec_window()
-    
+    exec_main_window()
