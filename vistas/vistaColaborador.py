@@ -4,6 +4,8 @@ from PyQt5 import uic
 import os
 import BaseDatos.connetion as BD
 from datetime import datetime
+from vistas.vistaColaboradorObservaciones import *
+
 
 class MyGUI(QMainWindow):
 
@@ -31,8 +33,16 @@ class MyGUI(QMainWindow):
         self.Eliminar_PDF.clicked.connect(self.delete_pdf)
         self.actionRefresh.triggered.connect(lambda :self.reload_view(ID_colaborador))
         
+        self.pushButton_3.clicked.connect(self.abrir_observaciones)
+
         self.llenar_tabla_incapacidades(ID_colaborador)
+
+    def abrir_observaciones(self):
         
+        # Utiliza el atributo de la clase
+        self.ventana_observaciones = VistaColaboradorObservaciones(self.DocumentLineEdit.text())
+        self.ventana_observaciones.show()  # Asegúrate de llamar a show() para hacer visible la ventana
+
     def reload_view(self, ID_colaborador):
         self.llenar_tabla_incapacidades(ID_colaborador)
         
@@ -149,7 +159,7 @@ class MyGUI(QMainWindow):
                 item = QTableWidgetItem(str(data))
                 self.tableWidget.setItem(row_number, column_number, item)
             
-        
+
 def main():
     app = QApplication([])
     window = MyGUI()
