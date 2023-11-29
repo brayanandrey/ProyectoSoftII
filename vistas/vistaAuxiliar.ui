@@ -274,17 +274,17 @@
     </column>
     <column>
      <property name="text">
+      <string>Documentacion</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
       <string>Colaborador</string>
      </property>
     </column>
     <column>
      <property name="text">
       <string>Fecha_Entrega</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Documentacion</string>
      </property>
     </column>
    </widget>

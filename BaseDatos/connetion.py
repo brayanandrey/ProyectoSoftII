@@ -159,3 +159,27 @@ def verificar_credenciales(email, password):
         cerrar_conexion(connection, cursor)
 
 
+def obtener_datos_incapacidades_con_nombre(ID_Colaborador):
+    try:
+        connection = conectar()
+        cursor = connection.cursor()
+
+        # Realiza la consulta para obtener los datos de la tabla incapacidades con el nombre del colaborador
+        query = """
+            SELECT i.Estado, i.Tipo_incapacidad, i.nombre_archivo, c.nombre
+            FROM incapacidades i
+            JOIN colaboradores c ON i.ID_Colaborador = c.Documento
+            WHERE i.ID_Colaborador = %s
+        """
+        cursor.execute(query, (ID_Colaborador,))
+
+        # Obtiene todos los resultados de la consulta
+        results = cursor.fetchall()
+
+        return results
+
+    except pymysql.Error as e:
+        print(f"Error al obtener datos de la base de datos: {e}")
+
+    finally:
+        cerrar_conexion(connection, cursor)

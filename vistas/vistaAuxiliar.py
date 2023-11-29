@@ -1,16 +1,14 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtCore import pyqtSlot
-from BaseDatos.connetion import conectar, cerrar_conexion, obtener_datos_incapacidades, obtener_ID_colaborador
+from BaseDatos.connetion import *
 
 class AuxiliarWindow(QMainWindow):
     def __init__(self, email):
         super(AuxiliarWindow, self).__init__()
         uic.loadUi("vistas/vistaAuxiliar.ui", self)
         self.show()
-
-        # Almacena el email como un atributo de instancia
-        self.email = email
+        self.email = email  # Guardar el email en la instancia para su uso posterior
 
         # Conecta los botones a sus respectivas funciones
         self.cargar_PDF_3.clicked.connect(self.enviar_a_colaborador)
@@ -34,10 +32,13 @@ class AuxiliarWindow(QMainWindow):
         self.actualizar_tabla()
 
     def actualizar_tabla(self):
-        # Consultar los datos de la base de datos y actualizar la tabla
-        # Estos son ejemplos, ajusta según tu implementación real
-        ID_Colaborador = obtener_ID_colaborador(self.email)  # Ajusta según tu implementación
-        data_from_db = obtener_datos_incapacidades(ID_Colaborador)  # Ajusta según tu implementación
+        # Obtén el ID del colaborador usando el email almacenado en la instancia de la ventana
+        ID_Colaborador = obtener_ID_colaborador(self.email)
+    
+        # Obtén los datos de incapacidades incluyendo el nombre del colaborador
+        data_from_db = obtener_datos_incapacidades_con_nombre(ID_Colaborador)
+    
+        # Carga los datos en la tabla
         self.cargar_datos_en_tabla(data_from_db)
 
     def cargar_datos_en_tabla(self, data):
@@ -68,9 +69,7 @@ class AuxiliarWindow(QMainWindow):
         pass
 
 if __name__ == "__main__":
-    # Puedes pasar el email como argumento al crear la instancia de la ventana
     app = QApplication([])
-    email = "correo@ejemplo.com"  # Ajusta con el email correspondiente
-    window = AuxiliarWindow(email)
+    window = AuxiliarWindow("correo_electronico@dominio.com")  # Reemplaza con el correo electrónico real
     window.setWindowTitle("Transcripción de Incapacidades")
     app.exec_()
