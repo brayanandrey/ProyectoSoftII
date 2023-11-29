@@ -3,6 +3,7 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5 import uic
 import os
 import BaseDatos.connetion as BD
+from datetime import datetime
 
 class MyGUI(QMainWindow):
 
@@ -10,7 +11,7 @@ class MyGUI(QMainWindow):
 
     def __init__(self, email):
         super(MyGUI, self).__init__()
-        uic.loadUi("vistas/vistaColaborador.ui", self)
+        uic.loadUi("vistas/PyQt5/vistaColaborador.ui", self)
         self.show()
         self.email = email
         
@@ -70,11 +71,12 @@ class MyGUI(QMainWindow):
         
         type_inability = self.show_selected_type_inability()
         selected_charge = self.show_selected_charge()
+        fecha_entrega = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         #selected_document = self.show_selected_document()
         # documentacion = self.show_file_dialog()
         
         BD.conectar()
-        BD.insertar_incapacidad(self.DescriptiontextEdit.toPlainText(), "Pendiente", self.DocumentLineEdit.text(), type_inability, documentacion, os.path.basename(self.label_file_name.text()))
+        BD.insertar_incapacidad(self.DescriptiontextEdit.toPlainText(), "Pendiente", self.DocumentLineEdit.text(), type_inability, documentacion, os.path.basename(self.label_file_name.text()), fecha_entrega)
         
         self.nuevaIncapacidadSignal.emit(
             self.NamelineEdit.text(),

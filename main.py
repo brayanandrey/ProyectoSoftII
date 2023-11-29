@@ -23,11 +23,8 @@ def tipos_incapacidades():
 
 def main():
     facade = RecepcionIncapacidadesFacade()
-
-
     facade.recibir_incapacidad(incapacidad1)
     facade.recibir_incapacidad(incapacidad2)
-
     facade.verificar_incapacidades(incapacidad1)
     facade.verificar_incapacidades(incapacidad2)
 
@@ -60,13 +57,27 @@ def exec_main_window():
     app = QApplication([])
     login_window = LoginWindow()
 
-    if login_window.exec_() == QDialog.Accepted:
+    if login_window.exec_() == QDialog.Accepted and login_window.lider == False:
         email = login_window.obtener_email()
+<<<<<<< Updated upstream
         main_window = MyGUI(email)
         main_window.setWindowTitle("Gestión Incapacidades")
         main_window.show()
         app.exec_()
         exec_auxiliar_window(email) 
+=======
+        print(email)
+        window = MyGUI(email)
+        window.setWindowTitle("Gestión Incapacidades")
+        window.show()
+        app.exec_() 
+    if login_window.exec_() == QDialog.Accepted and login_window.lider == True:
+        email = login_window.obtener_email()
+        window = Vista_jefe()
+        window.setWindowTitle("Gestión Incapacidades")
+        window.show()
+        app.exec_()
+>>>>>>> Stashed changes
 
 def main():
     recepcion_facade = RecepcionIncapacidadesFacade()

@@ -6,7 +6,7 @@ from BaseDatos.connetion import *
 class RegistroWindow(QDialog):
     def __init__(self):
         super(RegistroWindow, self).__init__()
-        loadUi("vistas/Vista_Registro.ui", self)
+        loadUi("vistas/PyQt5/Vista_Registro.ui", self)
         self.setWindowTitle("Registro")
 
         self.pushButton_3.clicked.connect(self.registrar)
