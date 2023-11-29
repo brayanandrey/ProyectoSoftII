@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtCore import pyqtSlot
 from BaseDatos.connetion import *
+from datetime import datetime
 
 class AuxiliarWindow(QMainWindow):
     def __init__(self, email):
@@ -42,7 +43,7 @@ class AuxiliarWindow(QMainWindow):
         self.cargar_datos_en_tabla(data_from_db)
 
     def cargar_datos_en_tabla(self, data):
-        # Limpia la tabla antes de cargar nuevos datos
+    # Limpia la tabla antes de cargar nuevos datos
         self.tableWidget_3.setRowCount(0)
 
         # Itera sobre los datos y agrégales a la tabla
@@ -50,7 +51,12 @@ class AuxiliarWindow(QMainWindow):
             self.tableWidget_3.insertRow(row_number)
             for column_number, column_data in enumerate(row_data):
                 item = QTableWidgetItem(str(column_data))
+                if isinstance(column_data, datetime):
+                    formatted_date = column_data.strftime('%Y-%m-%d %H:%M:%S')
+                    item.setText(formatted_date)
+                    print(f"Fecha formateada: {formatted_date}")  # Agrega esta línea
                 self.tableWidget_3.setItem(row_number, column_number, item)
+
 
     def enviar_a_colaborador(self):
         # Implementa la lógica para enviar la información faltante al colaborador

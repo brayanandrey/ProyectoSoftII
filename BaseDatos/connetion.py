@@ -1,4 +1,5 @@
 import pymysql
+from datetime import date
 
 def conectar():
     return pymysql.connect(
@@ -171,6 +172,50 @@ def obtener_datos_incapacidades_con_nombre(ID_Colaborador):
             JOIN colaboradores c ON i.ID_Colaborador = c.Documento
             WHERE i.ID_Colaborador = %s
         """
+        cursor.execute(query, (ID_Colaborador,))
+
+        # Obtiene todos los resultados de la consulta
+        results = cursor.fetchall()
+
+        return results
+
+    except pymysql.Error as e:
+        print(f"Error al obtener datos de la base de datos: {e}")
+
+    finally:
+        cerrar_conexion(connection, cursor)
+
+def insertar_incapacidad(descripcion, estado, ID_Colaborador, Tipo_incapacidad, documentacion, nombre_archivo):
+    try:
+        connection = conectar()
+        cursor = connection.cursor()
+
+        # Agregar la fecha actual al registro
+        fecha_registro = date.today()
+
+        # Query para la inserción
+        query = "INSERT INTO incapacidades (descripcion, estado, ID_Colaborador, Tipo_incapacidad, documentacion, nombre_archivo, Fecha_Registro) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        data = (descripcion, estado, ID_Colaborador, Tipo_incapacidad, documentacion, nombre_archivo, fecha_registro)
+
+        # Ejecutar la inserción
+        cursor.execute(query, data)
+        connection.commit()
+        print("Incapacidad insertada correctamente")
+
+    except pymysql.Error as e:
+        print(f"Error al insertar datos en la base de datos: {e}")
+        connection.rollback()
+
+    finally:
+        cerrar_conexion(connection, cursor)
+
+def obtener_datos_incapacidades(ID_Colaborador):
+    try:
+        connection = conectar()
+        cursor = connection.cursor()
+
+        # Realiza la consulta para obtener los datos de la tabla incapacidades
+        query = "SELECT Estado, Tipo_incapacidad, nombre_archivo, Fecha_Registro FROM incapacidades WHERE ID_Colaborador = %s"
         cursor.execute(query, (ID_Colaborador,))
 
         # Obtiene todos los resultados de la consulta
