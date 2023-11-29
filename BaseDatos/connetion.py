@@ -181,6 +181,31 @@ def verificar_credenciales(email, password):
 
     finally:
         cerrar_conexion(connection, cursor)
+
+def verificar_credenciales_Financiero(email, password):
+    try:
+        connection = conectar()
+        cursor = connection.cursor()
+
+        # Realiza la consulta para obtener la contraseña del email dado
+        query = "SELECT password FROM departamento_financiero WHERE Email = %s"
+        cursor.execute(query, (email,))
+        result = cursor.fetchone()
+
+        # Verifica si se encontró el email y compara las contraseñas
+        if result and result[0] == password:
+            print("Credenciales válidas")
+            return True
+        else:
+            print("Credenciales inválidas")
+            return False
+
+    except pymysql.Error as e:
+        print(f"Error al verificar credenciales: {e}")
+        return False
+
+    finally:
+        cerrar_conexion(connection, cursor)
         
 def obtener_incapacidades_jefe(Documento):
     try:
@@ -333,3 +358,4 @@ def obtener_mensajes(Documento):
 
     finally:
         cerrar_conexion(connection, cursor)
+

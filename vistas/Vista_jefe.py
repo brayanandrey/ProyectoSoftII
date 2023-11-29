@@ -16,7 +16,11 @@ class Vista_jefe(QMainWindow):
         
         self.enviarNoti.clicked.connect(lambda :self.enviar_notificacion(notificacion))
         self.textEdit.setText(obtener_mensajes(self.comboBox.currentText()))
-        
+
+
+        # Conectar el evento de clic del botón cargar_PDF_2 al método cargar_pdf_2_clicked
+        self.cargar_PDF_2.clicked.connect(self.cargar_pdf_2_clicked)
+
         # print(incapacidades_data)
         
         # Llena la QTableWidget con los datos obtenidos
@@ -52,7 +56,35 @@ class Vista_jefe(QMainWindow):
             for column_number, column_data in enumerate(row_data):
                 item = QTableWidgetItem(str(column_data))
                 self.tableWidget.setItem(row_number, column_number, item)
-                
+
+    def cargar_pdf_2_clicked(self):
+        # Obtener la fila seleccionada
+        selected_row = self.tableWidget.currentRow()
+
+        if selected_row >= 0:
+            documento = self.comboBox.currentText()
+            incapacidades = obtener_incapacidades_jefe(documento)
+
+            if 0 <= selected_row < len(incapacidades):
+                id_incapacidad_index = 2 
+
+                if 0 <= id_incapacidad_index < len(incapacidades[selected_row]):
+                    id_incapacidad = incapacidades[selected_row][id_incapacidad_index]
+
+                    if id_incapacidad is not None:
+                        print(f"Incapacidad {id_incapacidad} fue enviada.")
+                    else:
+                        print("No se pudo encontrar la ID_Incapacidad para la fila seleccionada.")
+                else:
+                    print("El índice de ID_Incapacidad está fuera de rango para la fila seleccionada.")
+            else:
+                print("La fila seleccionada está fuera de rango.")
+        else:
+            print("Por favor, selecciona una fila antes de hacer clic en Cargar PDF 2.")
+
+
+
+
 if __name__ == '__main__':
     app = QApplication([])
     window = Vista_jefe()

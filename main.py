@@ -7,7 +7,6 @@ from vistas.vistaColaborador import *
 from vistas.Vista_Login import *
 from vistas.Vista_Registro import *
 from vistas.vistaAuxiliar import *
-from vistas.Vista_Financiero import *
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import os
@@ -57,38 +56,20 @@ def exec_auxiliar_window(email):
 def exec_main_window():
     app = QApplication([])
     login_window = LoginWindow()
-    finncial_window = Vista_Financiero()
 
     if login_window.exec_() == QDialog.Accepted and login_window.lider == False:
         email = login_window.obtener_email()
-        main_window = MyGUI(email)
-        main_window.setWindowTitle("Gestión Incapacidades")
-        main_window.show()
-        app.exec_()
-        
+        print(email)
+        window = MyGUI(email)
+        window.setWindowTitle("Gestión Incapacidades")
+        window.show()
+        app.exec_() 
     if login_window.exec_() == QDialog.Accepted and login_window.lider == True:
         email = login_window.obtener_email()
         window = Vista_jefe()
         window.setWindowTitle("Gestión Incapacidades")
         window.show()
         app.exec_()
-        
-        # Inicio vistas------------------------------------------------
-        
-        """ exec_auxiliar_window(email) 
-        print(email)
-        window = MyGUI(email)
-        window.setWindowTitle("Gestión Incapacidades")
-        window.show()
-        app.exec_()
-        
-        window = Vista_Financiero()
-        window.setWindowTitle("Gestión Incapacidades")
-        window.show()
-        app.exec_() """
-        
-        #fin vistas----------------------------------------------------
-
 
 def main():
     recepcion_facade = RecepcionIncapacidadesFacade()
