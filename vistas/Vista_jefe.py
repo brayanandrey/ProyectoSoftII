@@ -72,15 +72,16 @@ class Vista_jefe(QMainWindow):
                     id_incapacidad = incapacidades[selected_row][id_incapacidad_index]
 
                     if id_incapacidad is not None:
-                        print(f"Incapacidad {id_incapacidad} fue enviada.")
+                        # Mostrar el mensaje en un cuadro de diálogo
+                        QMessageBox.information(self, "Envío de Incapacidad", f"Incapacidad {id_incapacidad} fue enviada.")
                     else:
-                        print("No se pudo encontrar la ID_Incapacidad para la fila seleccionada.")
+                        QMessageBox.warning(self, "Error", "No se pudo encontrar la ID_Incapacidad para la fila seleccionada.")
                 else:
-                    print("El índice de ID_Incapacidad está fuera de rango para la fila seleccionada.")
+                    QMessageBox.warning(self, "Error", "El índice de ID_Incapacidad está fuera de rango para la fila seleccionada.")
             else:
-                print("La fila seleccionada está fuera de rango.")
+                QMessageBox.warning(self, "Error", "La fila seleccionada está fuera de rango.")
         else:
-            print("Por favor, selecciona una fila antes de hacer clic en Cargar PDF 2.")
+            QMessageBox.warning(self, "Error", "Por favor, selecciona una fila antes de hacer clic en Cargar PDF 2.")
 
 
 
